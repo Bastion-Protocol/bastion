@@ -4,17 +4,23 @@
   "description": "Solidity smart contracts implementing the Bastion Protocol lending circles",
   "scripts": {
     "dev": "hardhat node",
-    "build": "echo 'Contracts build requires network access for Solidity compiler'",
+    "build": "hardhat compile",
     "test": "hardhat test",
     "test:coverage": "hardhat coverage",
+    "test:gas": "REPORT_GAS=true hardhat test",
     "deploy:localhost": "hardhat run scripts/deploy.ts --network localhost",
-    "deploy:testnet": "hardhat run scripts/deploy.ts --network goerli",
-    "deploy:mainnet": "hardhat run scripts/deploy.ts --network mainnet",
+    "deploy:testnet": "hardhat run scripts/deploy.ts",
+    "deploy:mainnet": "hardhat run scripts/deploy.ts",
     "verify": "hardhat verify",
+    "verify:all": "node scripts/verify-all.js",
     "lint": "solhint contracts/**/*.sol",
     "lint:fix": "solhint contracts/**/*.sol --fix",
-    "type-check": "echo 'Type checking requires contract compilation'",
-    "typechain": "hardhat typechain"
+    "type-check": "hardhat typechain",
+    "typechain": "hardhat typechain",
+    "clean": "hardhat clean",
+    "size": "hardhat size-contracts",
+    "analyze": "slither .",
+    "flatten": "hardhat flatten"
   },
   "dependencies": {
     "@aave/core-v3": "^1.19.3",
@@ -36,6 +42,7 @@
     "ethers": "^6.10.0",
     "hardhat": "^2.19.5",
     "hardhat-gas-reporter": "^1.0.9",
+    "hardhat-contract-sizer": "^2.10.0",
     "solidity-coverage": "^0.8.7",
     "solhint": "^4.1.1",
     "ts-node": "^10.9.2",
@@ -46,5 +53,30 @@
     "node": ">=18.0.0"
   },
   "author": "Bastion Protocol Team",
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": [
+    "defi",
+    "lending",
+    "circles",
+    "state-channels",
+    "erc-7824",
+    "yellow-network",
+    "aave",
+    "social-verification",
+    "blockchain",
+    "ethereum",
+    "polygon",
+    "arbitrum",
+    "optimism",
+    "base"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bastion-Protocol/bastion.git",
+    "directory": "contracts"
+  },
+  "bugs": {
+    "url": "https://github.com/Bastion-Protocol/bastion/issues"
+  },
+  "homepage": "https://bastion-protocol.com"
 }
