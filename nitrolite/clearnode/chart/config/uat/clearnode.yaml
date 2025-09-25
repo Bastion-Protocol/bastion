@@ -1,0 +1,62 @@
+config:
+  args: ["clearnode"]
+  logLevel: debug
+  database:
+    driver: postgres
+    host: postgresql.core
+    port: 5432
+    name: clearnet_uat
+    user: clearnet_uat_admin
+  envSecret: ""
+  extraEnvs:
+    CLEARNODE_LOG_LEVEL: "debug"
+    POLYGON_CUSTODY_CONTRACT_ADDRESS: "0x490fb189DdE3a01B00be9BA5F41e3447FbC838b6"
+    POLYGON_ADJUDICATOR_ADDRESS: "0x7de4A0736Cf5740fD3Ca2F2e9cc85c9AC223eF0C"
+    POLYGON_BALANCE_CHECKER_ADDRESS: "0x2352c63A83f9Fd126af8676146721Fa00924d7e4"
+    ETH_SEPOLIA_CUSTODY_CONTRACT_ADDRESS: "0x490fb189DdE3a01B00be9BA5F41e3447FbC838b6"
+    ETH_SEPOLIA_ADJUDICATOR_ADDRESS: "0x7de4A0736Cf5740fD3Ca2F2e9cc85c9AC223eF0C"
+    ETH_SEPOLIA_BALANCE_CHECKER_ADDRESS: "0xBfbCed302deD369855fc5f7668356e123ca4B329"
+    MSG_EXPIRY_TIME: "60"
+
+image:
+  repository: ghcr.io/erc7824/nitrolite/clearnode
+  tag: c9c4d4c
+
+service:
+  http:
+    enabled: true
+    port: 8000
+    path: /
+
+metrics:
+  enabled: true
+  podmonitoring:
+    enabled: true
+  port: 4242
+  endpoint: "/metrics"
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 256Mi
+    ephemeral-storage: 100Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+    ephemeral-storage: 100Mi
+
+autoscaling:
+  enabled: false
+
+networking:
+  externalHostname: canarynet.yellow.com
+  tlsClusterIssuer: zerossl-prod
+  gateway:
+    enabled: false
+  ingress:
+    enabled: true
+    className: nginx
+    tls:
+      enabled: true
+
+imagePullSecret: ghcr-pull
